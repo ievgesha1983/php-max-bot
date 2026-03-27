@@ -1,0 +1,24 @@
+{
+    "name": "evgesha-factory/php-max-bot",
+    "description": "Max bot client for Max Messenger",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "EvgeshaFactory\\PhpMaxBot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Evgenii Ivanov",
+            "email": "ievgesha@mail.ru"
+        }
+    ],
+    "require": {
+      "ext-curl": "*"
+    }
+}
