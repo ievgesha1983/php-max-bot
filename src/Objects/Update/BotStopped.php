@@ -5,7 +5,7 @@ namespace EvgeshaFactory\PhpMaxBot\Objects\Update;
 use EvgeshaFactory\PhpMaxBot\Objects\Update;
 use EvgeshaFactory\PhpMaxBot\Objects\User;
 
-class BotStarted extends Update
+class BotStopped extends Update
 {
     protected int $chatId;
     protected User $user;

@@ -4,6 +4,8 @@ namespace EvgeshaFactory\PhpMaxBot;
 
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotAdded;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotRemoved;
+use EvgeshaFactory\PhpMaxBot\Objects\Update\BotStarted;
+use EvgeshaFactory\PhpMaxBot\Objects\Update\BotStopped;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\MessageCreated;
 
 class ResponseProcessor
@@ -82,8 +84,10 @@ class ResponseProcessor
     {
         return match ($update['updateType']) {
             'message_created' => new MessageCreated($update),
-            'bot_addad' => new BotAdded($update),
+            'bot_added' => new BotAdded($update),
             'bot_removed' => new BotRemoved($update),
+            'bot_started' => new BotStarted($update),
+            'bot_stopped' => new BotStopped($update),
             default => ['Error' => "Класс {$update['updateType']} не распознан"],
         };
     }
