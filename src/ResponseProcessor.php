@@ -80,6 +80,13 @@ class ResponseProcessor
         return $updates;
     }
 
+    public function decodeSendMessage(string $response): array
+    {
+        $responseUpdates = $this->decodeJson($response);
+
+        return $responseUpdates;
+    }
+
     public function createUpdate(array $update): mixed
     {
         return match ($update['updateType']) {

@@ -2,12 +2,16 @@
 
 namespace EvgeshaFactory\PhpMaxBot;
 
+use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage;
+use EvgeshaFactory\PhpMaxBot\Objects\Message;
+
 class ApiGateway
 {
     private const string API_MAX = "https://platform-api.max.ru";
     private const string API_ME = "/me";
     private const string API_CHATS = "/chats";
     private const string API_UPDATES = "/updates";
+    private const string API_MESSAGES = "/messages";
 
     private Bot $bot;
 
@@ -85,17 +89,16 @@ class ApiGateway
         return $response;
     }
 
-    public function sendMessage(): string
-    {
+    public function sendMessage(
+        NewMessage $newMessage,
+    ): string {
         $headers = [
             "Authorization: {$this->bot->getToken()}",
             "Content-Type: application/json"
         ];
-        $postFields = [
-            ""
-        ];
+        $postFields = json_encode($newMessage->getBody()->convertToArray());
 
-        $curl = curl_init(self::MAX_API . "/messages");
+        $curl = curl_init(self::API_MAX . self::API_MESSAGES . $newMessage->createGetParameters());
         curl_setopt($curl, CURLOPT_POSTFIELDS, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);

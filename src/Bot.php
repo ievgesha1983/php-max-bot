@@ -53,6 +53,13 @@ class Bot
         return $responseProcessor->decodeUpdates($updates);
     }
 
+    public function sendMessage($message): array
+    {
+        $sendMessagesResponse = $this->api->sendMessage($message);
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeSendMessage($sendMessagesResponse);
+    }
+
     /**
      * Не выдает сообщение, если получены несуществующие поля. Не создает новые поля.
      */
