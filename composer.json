@@ -1,6 +1,13 @@
 {
     "name": "evgesha-factory/php-max-bot",
-    "description": "Max bot client for Max Messenger",
+    "description": "PHP bot client for Max Messenger library",
+    "keywords": [
+        "max bot",
+        "php",
+        "bot",
+        "max",
+        "max messenger"
+    ],
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^12.5",
