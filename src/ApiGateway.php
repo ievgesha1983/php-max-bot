@@ -7,11 +7,11 @@ use EvgeshaFactory\PhpMaxBot\Objects\Message;
 
 class ApiGateway
 {
-    private const string API_MAX = "https://platform-api.max.ru";
-    private const string API_ME = "/me";
-    private const string API_CHATS = "/chats";
-    private const string API_UPDATES = "/updates";
-    private const string API_MESSAGES = "/messages";
+    private const API_MAX = "https://platform-api.max.ru";
+    private const API_ME = "/me";
+    private const API_CHATS = "/chats";
+    private const API_UPDATES = "/updates";
+    private const API_MESSAGES = "/messages";
     private string $token;
 
     public function __construct(string $token)

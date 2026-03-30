@@ -1,6 +1,6 @@
 {
     "name": "evgesha-factory/php-max-bot",
-    "description": "PHP bot client for Max Messenger library",
+    "description": "PHP bot client for Max Messenger",
     "keywords": [
         "max bot",
         "php",
