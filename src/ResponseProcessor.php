@@ -49,16 +49,9 @@ class ResponseProcessor
         return ['Error' => 'Произошла ошибка декодировки JSON'];
     }
 
-    public function decodeBotInfo(string $response): Bot
+    public function decodeBotInfo(string $response): array|null
     {
-        $botInfo = $this->decodeJson($response);
-        $bot = new Bot('');
-        foreach ($botInfo as $key => $value) {
-            if (property_exists($bot, $key) && $key !== 'token') {
-                $bot->$key = $value;
-            }
-        }
-        return $bot;
+        return $this->decodeJson($response);
     }
 
     public function decodeUpdates(string $response): array

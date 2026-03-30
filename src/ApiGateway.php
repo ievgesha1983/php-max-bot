@@ -12,12 +12,11 @@ class ApiGateway
     private const string API_CHATS = "/chats";
     private const string API_UPDATES = "/updates";
     private const string API_MESSAGES = "/messages";
+    private string $token;
 
-    private Bot $bot;
-
-    public function __construct(Bot $bot)
+    public function __construct(string $token)
     {
-        $this->bot = $bot;
+        $this->token = $token;
     }
 
     public function getBotInfo(): string
@@ -26,7 +25,7 @@ class ApiGateway
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = [
-            "Authorization: {$this->bot->getToken()}"
+            "Authorization: {$this->token}"
         ];
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         $response = curl_exec($curl);
@@ -41,7 +40,7 @@ class ApiGateway
         string|false|null $types = false
     ): string {
         $headers = [
-            "Authorization: {$this->bot->getToken()}"
+            "Authorization: {$this->token}"
         ];
 
         $parameters = '';
@@ -93,7 +92,7 @@ class ApiGateway
         NewMessage $newMessage,
     ): string {
         $headers = [
-            "Authorization: {$this->bot->getToken()}",
+            "Authorization: {$this->token}",
             "Content-Type: application/json"
         ];
         $postFields = json_encode($newMessage->getBody()->convertToArray());

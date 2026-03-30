@@ -2,44 +2,41 @@
 
 namespace EvgeshaFactory\PhpMaxBot;
 
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\Bot\Command;
 
-class Bot
+class Bot extends AbstractProcessor
 {
-    private string $token;
-    private int $userId;
-    private string $firstName;
-    private string $name;
-    private string $username;
-    private bool $isBot = true;
-    private int $lastActivityTime;
-    private string|false $description = false;
-    private string|false $avatarUrl = false;
-    private string|false $fullAvatarUrl = false;
-    private Command|false $command = false;
+    protected int $userId;
+    protected string $firstName;
+    protected string $name;
+    protected string $username;
+    protected bool $isBot = true;
+    protected int $lastActivityTime;
+    protected string|false $description = false;
+    protected string|false $avatarUrl = false;
+    protected string|false $fullAvatarUrl = false;
+    protected Command|false $command = false;
     private ApiGateway $api;
 
     public function __construct(string $token)
     {
-        $this->token = $token;
-        $this->api = new ApiGateway($this);
-    }
-
-    public function getToken(): string
-    {
-        return $this->token;
-    }
-
-    public function getUserId(): string
-    {
-        return $this->userId;
+        $this->api = new ApiGateway($token);
     }
 
     public function getBotInfo(): Bot
     {
         $botInfo = $this->api->getBotInfo();
         $responseProcessor = new ResponseProcessor();
-        return $responseProcessor->decodeBotInfo($botInfo);
+        $decodedBotInfo = $responseProcessor->decodeBotInfo($botInfo);
+        foreach ($decodedBotInfo as $key => $value) {
+            if (property_exists($this, $key)) {
+                if ($key !== 'token') {
+                    $this->$key = $value;
+                }
+            }
+        }
+        return $this;
     }
 
     public function getUpdates(
