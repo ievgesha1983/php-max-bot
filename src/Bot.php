@@ -56,18 +56,4 @@ class Bot extends AbstractProcessor
         $responseProcessor = new ResponseProcessor();
         return $responseProcessor->decodeSendMessage($sendMessagesResponse);
     }
-
-    /**
-     * Не выдает сообщение, если получены несуществующие поля. Не создает новые поля.
-     */
-    public function updateBotInfo(): void
-    {
-        $responseProcessor = new ResponseProcessor();
-        $botInfo = $responseProcessor->decodeBotInfo($this->api->getBotInfo());
-        foreach ($botInfo as $name => $value) {
-            if (property_exists($this, $name) && $name !== 'token') {
-                $this->$name = $value;
-            }
-        }
-    }
 }
