@@ -4,7 +4,10 @@ namespace EvgeshaFactory\PhpMaxBot;
 
 class ApiGateway
 {
-    private const string MAX_API = "https://platform-api.max.ru";
+    private const string API_MAX = "https://platform-api.max.ru";
+    private const string API_ME = "/me";
+    private const string API_CHATS = "/chats";
+    private const string API_UPDATES = "/updates";
 
     private Bot $bot;
 
@@ -15,7 +18,7 @@ class ApiGateway
 
     public function getBotInfo(): string
     {
-        $curl = curl_init(self::MAX_API . "/me");
+        $curl = curl_init(self::API_MAX . self::API_ME);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = [
@@ -74,7 +77,7 @@ class ApiGateway
             $parameters = '?' . substr($parameters, 1);
         }
 
-        $curl = curl_init(self::MAX_API . "/updates{$parameters}");
+        $curl = curl_init(self::API_MAX . self::API_UPDATES . $parameters);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         $response = curl_exec($curl);
