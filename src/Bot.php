@@ -78,4 +78,10 @@ class Bot extends AbstractProcessor
         $responseProcessor = new ResponseProcessor();
         return $responseProcessor->decodeUnsubscribeFromUpdates($response);
     }
+
+    public function analysisOfUpdates(string $updates): array
+    {
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeUpdates($updates);
+    }
 }
