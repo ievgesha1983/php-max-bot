@@ -55,6 +55,13 @@ class ResponseProcessor
         return $this->decodeJson($response);
     }
 
+    public function decodeUpdate(string $response): array
+    {
+        $newUpdate = $this->createUpdate($this->decodeJson($response));
+
+        return $newUpdate;
+    }
+
     public function decodeUpdates(string $response): array
     {
         $responseUpdates = $this->decodeJson($response);
@@ -74,13 +81,6 @@ class ResponseProcessor
         return $updates;
     }
 
-    public function decodeSendMessage(string $response): array
-    {
-        $responseUpdates = $this->decodeJson($response);
-
-        return $responseUpdates;
-    }
-
     public function createUpdate(array $update): mixed
     {
         return match ($update['updateType']) {
@@ -91,6 +91,13 @@ class ResponseProcessor
             'bot_stopped' => new BotStopped($update),
             default => ['Error' => "Класс {$update['updateType']} не распознан"],
         };
+    }
+
+    public function decodeSendMessage(string $response): array
+    {
+        $responseUpdates = $this->decodeJson($response);
+
+        return $responseUpdates;
     }
 
     public function decodeGetSubscriptions($response): array
