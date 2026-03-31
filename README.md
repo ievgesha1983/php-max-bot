@@ -23,6 +23,12 @@ getUpdates
 
 sendMessage
 
+getSubscription
+
+subscribeToUpdate
+
+unsubscribeToUpdate
+
 ### P.S.:
 
 Не судите строго. На данный момент я прохожу обучение, но работу никто не отменял.

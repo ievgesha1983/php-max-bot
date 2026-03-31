@@ -3,6 +3,7 @@
 namespace EvgeshaFactory\PhpMaxBot;
 
 use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+use EvgeshaFactory\PhpMaxBot\Objects\Api\NewSubscription;
 use EvgeshaFactory\PhpMaxBot\Objects\Bot\Command;
 
 class Bot extends AbstractProcessor
@@ -55,5 +56,26 @@ class Bot extends AbstractProcessor
         $sendMessagesResponse = $this->api->sendMessage($message);
         $responseProcessor = new ResponseProcessor();
         return $responseProcessor->decodeSendMessage($sendMessagesResponse);
+    }
+
+    public function getSubscriptions(): array
+    {
+        $subscriptions = $this->api->getSubscriptions();
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeGetSubscriptions($subscriptions);
+    }
+
+    public function subscribeToUpdates(NewSubscription $newSubscription): array
+    {
+        $response = $this->api->subscribeToUpdates($newSubscription);
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeSubscribeToUpdates($response);
+    }
+
+    public function unsubscribeFromUpdates(string $url): array
+    {
+        $response = $this->api->unsubscribeFromUpdates($url);
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeUnsubscribeFromUpdates($response);
     }
 }

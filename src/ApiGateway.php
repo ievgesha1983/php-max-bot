@@ -3,6 +3,7 @@
 namespace EvgeshaFactory\PhpMaxBot;
 
 use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage;
+use EvgeshaFactory\PhpMaxBot\Objects\Api\NewSubscription;
 use EvgeshaFactory\PhpMaxBot\Objects\Message;
 
 class ApiGateway
@@ -12,6 +13,7 @@ class ApiGateway
     private const API_CHATS = "/chats";
     private const API_UPDATES = "/updates";
     private const API_MESSAGES = "/messages";
+    private const API_SUBSCRIPTIONS = "/subscriptions";
     private string $token;
 
     public function __construct(string $token)
@@ -39,9 +41,7 @@ class ApiGateway
         int|false|null $marker = false,
         string|false|null $types = false
     ): string {
-        $headers = [
-            "Authorization: {$this->token}"
-        ];
+        $headers = ["Authorization: {$this->token}"];
 
         $parameters = '';
         if ($limit !== false) {
@@ -98,11 +98,57 @@ class ApiGateway
         $postFields = json_encode($newMessage->getBody()->convertToArray());
 
         $curl = curl_init(self::API_MAX . self::API_MESSAGES . $newMessage->createGetParameters());
-        curl_setopt($curl, CURLOPT_POSTFIELDS, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $postFields);
 
+        $response = curl_exec($curl);
+
+        return $response;
+    }
+
+    public function getSubscriptions(): string
+    {
+        $headers = ["Authorization: {$this->token}"];
+
+        $curl = curl_init(self::API_MAX . self::API_SUBSCRIPTIONS);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $response = curl_exec($curl);
+
+        return $response;
+    }
+
+    public function subscribeToUpdates(NewSubscription $subscription): string
+    {
+        $headers = [
+            "Authorization: {$this->token}",
+            "Content-Type: application/json"
+        ];
+        $postFields = json_encode($subscription->convertToMaxArray());
+
+        $curl = curl_init(self::API_MAX . self::API_SUBSCRIPTIONS);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postFields);
+        $response = curl_exec($curl);
+
+        return $response;
+    }
+
+    public function unsubscribeFromUpdates(string $url): string
+    {
+        $headers = [
+            "Authorization: {$this->token}",
+        ];
+        $postFields = http_build_query(["url" => $url]);
+
+        $curl = curl_init(self::API_MAX . self::API_SUBSCRIPTIONS . "?{$postFields}");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
         $response = curl_exec($curl);
 
         return $response;

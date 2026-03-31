@@ -2,6 +2,7 @@
 
 namespace EvgeshaFactory\PhpMaxBot;
 
+use EvgeshaFactory\PhpMaxBot\Objects\Subscription;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotAdded;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotRemoved;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotStarted;
@@ -90,5 +91,28 @@ class ResponseProcessor
             'bot_stopped' => new BotStopped($update),
             default => ['Error' => "Класс {$update['updateType']} не распознан"],
         };
+    }
+
+    public function decodeGetSubscriptions($response): array
+    {
+        $subscriptions = $this->decodeJson($response);
+        return array_map(
+            function ($subscription) {
+                return new Subscription($subscription);
+            },
+            $subscriptions['subscriptions']
+        );
+    }
+
+    public function decodeSubscribeToUpdates($response): array
+    {
+        $decodedResponse = $this->decodeJson($response);
+        return $decodedResponse;
+    }
+
+    public function decodeUnsubscribeFromUpdates($response): array
+    {
+        $decodedResponse = $this->decodeJson($response);
+        return $decodedResponse;
     }
 }
