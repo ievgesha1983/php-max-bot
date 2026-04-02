@@ -68,6 +68,11 @@ class ResponseProcessor
         };
     }
 
+    public function decodeJsonUpdate(string $update): Update|array
+    {
+        return $this->decodeUpdate($this->decodeJson($update));
+    }
+
     public function decodeUpdates(string $response): array
     {
         $responseUpdates = $this->decodeJson($response);

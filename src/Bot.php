@@ -5,6 +5,7 @@ namespace EvgeshaFactory\PhpMaxBot;
 use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\Api\NewSubscription;
 use EvgeshaFactory\PhpMaxBot\Objects\Bot\Command;
+use EvgeshaFactory\PhpMaxBot\Objects\Update;
 
 class Bot extends AbstractProcessor
 {
@@ -77,5 +78,11 @@ class Bot extends AbstractProcessor
         $response = $this->api->unsubscribeFromUpdates($url);
         $responseProcessor = new ResponseProcessor();
         return $responseProcessor->decodeUnsubscribeFromUpdates($response);
+    }
+
+    public function analyzeUpdate(string $updateJson): Update
+    {
+        $responseProcessor = new ResponseProcessor();
+        return $responseProcessor->decodeJsonUpdate($updateJson);
     }
 }
