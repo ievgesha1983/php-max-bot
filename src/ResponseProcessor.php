@@ -3,6 +3,7 @@
 namespace EvgeshaFactory\PhpMaxBot;
 
 use EvgeshaFactory\PhpMaxBot\Objects\Subscription;
+use EvgeshaFactory\PhpMaxBot\Objects\Update;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotAdded;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotRemoved;
 use EvgeshaFactory\PhpMaxBot\Objects\Update\BotStarted;
@@ -55,13 +56,24 @@ class ResponseProcessor
         return $this->decodeJson($response);
     }
 
+    public function decodeUpdate(array $update): Update|array
+    {
+        return match ($update['updateType']) {
+            'message_created' => new MessageCreated($update),
+            'bot_added' => new BotAdded($update),
+            'bot_removed' => new BotRemoved($update),
+            'bot_started' => new BotStarted($update),
+            'bot_stopped' => new BotStopped($update),
+            default => ['Error' => "Класс {$update['updateType']} не распознан"],
+        };
+    }
+
     public function decodeUpdates(string $response): array
     {
         $responseUpdates = $this->decodeJson($response);
         $updates['updates'] = array_map(
             function ($update) {
-                $newUpdate = $this->createUpdate($update);
-                return $newUpdate;
+                return $this->decodeUpdate($update);
             },
             $responseUpdates['updates']
         );
@@ -79,18 +91,6 @@ class ResponseProcessor
         $responseUpdates = $this->decodeJson($response);
 
         return $responseUpdates;
-    }
-
-    public function createUpdate(array $update): mixed
-    {
-        return match ($update['updateType']) {
-            'message_created' => new MessageCreated($update),
-            'bot_added' => new BotAdded($update),
-            'bot_removed' => new BotRemoved($update),
-            'bot_started' => new BotStarted($update),
-            'bot_stopped' => new BotStopped($update),
-            default => ['Error' => "Класс {$update['updateType']} не распознан"],
-        };
     }
 
     public function decodeGetSubscriptions($response): array
