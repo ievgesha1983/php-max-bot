@@ -32,4 +32,14 @@ class Message extends AbstractProcessor
             }
         }
     }
+
+    public function getSenderId()
+    {
+        return $this->sender->getUserId();
+    }
+
+    public function getText()
+    {
+        return $this->body->getText();
+    }
 }

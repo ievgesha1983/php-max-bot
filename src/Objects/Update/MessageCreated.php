@@ -22,4 +22,14 @@ class MessageCreated extends Update
             }
         }
     }
+
+    public function getMessageText(): string
+    {
+        return $this->message->getText();
+    }
+
+    public function getMessageSenderId(): ?int
+    {
+        return $this->message->getSenderId();
+    }
 }

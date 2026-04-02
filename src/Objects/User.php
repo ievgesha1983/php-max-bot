@@ -24,4 +24,9 @@ class User extends AbstractProcessor
             }
         }
     }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
 }

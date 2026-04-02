@@ -26,4 +26,9 @@ class Body extends AbstractProcessor
             }
         }
     }
+
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
 }

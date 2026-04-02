@@ -12,4 +12,9 @@ abstract class Update extends AbstractProcessor
         $this->updateType = $updateType;
         $this->timestamp = $timestamp;
     }
+
+    public function getUpdateType(): string
+    {
+        return $this->updateType;
+    }
 }
