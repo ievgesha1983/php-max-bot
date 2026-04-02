@@ -2,11 +2,13 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message\Body;
 
-class Markup
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+
+class Markup extends AbstractProcessor
 {
-    private string $type;
-    private string $from;
-    private string $length;
+    protected string $type;
+    protected string $from;
+    protected string $length;
 
     public function __construct(array $markup)
     {

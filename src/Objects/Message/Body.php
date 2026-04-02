@@ -2,16 +2,17 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message;
 
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\Message\Body\Attachments;
 use EvgeshaFactory\PhpMaxBot\Objects\Message\Body\Markup;
 
-class Body
+class Body extends AbstractProcessor
 {
-    private string $mid;
-    private int $seq;
-    private string|null $text;
-    private Attachments|null|false $attachments = false;
-    private Markup|null|false $markup = false;
+    protected string $mid;
+    protected int $seq;
+    protected ?string $text;
+    protected ?Attachments $attachments;
+    protected ?Markup $markup;
 
     public function __construct(array $body)
     {

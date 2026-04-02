@@ -2,11 +2,11 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects;
 
-class Subscription
+class Subscription extends AbstractProcessor
 {
     protected string $url;
     protected int $time;
-    protected array|null $updateTypes;
+    protected ?array $updateTypes;
 
     public function __construct(array $subscription)
     {

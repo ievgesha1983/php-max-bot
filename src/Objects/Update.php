@@ -2,7 +2,7 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects;
 
-abstract class Update
+abstract class Update extends AbstractProcessor
 {
     protected string $updateType;
     protected int $timestamp;

@@ -7,15 +7,15 @@ use EvgeshaFactory\PhpMaxBot\Objects\Message\Link;
 use EvgeshaFactory\PhpMaxBot\Objects\Message\Recipient;
 use EvgeshaFactory\PhpMaxBot\Objects\Message\Stat;
 
-class Message
+class Message extends AbstractProcessor
 {
-    private Recipient $recipient;
-    private int $timestamp;
-    private Body $body;
-    private User|false $sender = false;
-    private Link|null|false $link = false;
-    private Stat|null|false $stat = false;
-    private string|null|false $url = false;
+    protected User $sender;
+    protected Recipient $recipient;
+    protected int $timestamp;
+    protected ?Link $link;
+    protected Body $body;
+    protected ?Stat $stat;
+    protected ?string $url;
 
     public function __construct(array $message)
     {

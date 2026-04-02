@@ -2,9 +2,11 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message;
 
-class Stat
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+
+class Stat extends AbstractProcessor
 {
-    private int $views;
+    protected int $views;
 
     public function __construct(array $stat)
     {

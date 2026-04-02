@@ -8,7 +8,7 @@ use EvgeshaFactory\PhpMaxBot\Objects\Update;
 class MessageCreated extends Update
 {
     protected Message $message;
-    protected string|null|false $userLocale = false;
+    protected ?string $userLocale;
 
     public function __construct(array $update)
     {

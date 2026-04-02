@@ -2,19 +2,19 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects;
 
-class User
+class User extends AbstractProcessor
 {
-    private int $userId;
-    private string $firstName;
-    private bool $isBot;
-    private int $lastActivityTime;
-    private string|null|false $lastName = false;
-    private string|null|false $username = false;
+    protected int $userId;
+    protected string $firstName;
+    protected ?string $lastName;
+    protected ?string $username;
+    protected bool $isBot;
+    protected int $lastActivityTime;
 
     /*
      * Устаревшее поле, скоро будет удалено
      */
-    private string|null|false $name = false;
+    protected ?string $name;
 
     public function __construct(array $user)
     {

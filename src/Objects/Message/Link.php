@@ -2,14 +2,15 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message;
 
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\User;
 
-class Link
+class Link extends AbstractProcessor
 {
-    private string $type;
-    private Body $message;
-    private User|null|false $sender = false;
-    private int|false $chatId = false;
+    protected string $type;
+    protected User $sender;
+    protected int $chatId;
+    protected Body $message;
 
     public function __construct(array $link)
     {

@@ -2,12 +2,13 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message\Body;
 
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\Message\Body\Attachments\Payload;
 
-class Attachments
+class Attachments extends AbstractProcessor
 {
-    private string $type;
-    private Payload $payload;
+    protected string $type;
+    protected Payload $payload;
 
     public function __construct(array $attachments)
     {

@@ -2,11 +2,13 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Message;
 
-class Recipient
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+
+class Recipient extends AbstractProcessor
 {
-    private ?int $chatId;
-    private string $chatType;
-    private ?int $userId = null;
+    protected ?int $chatId;
+    protected string $chatType;
+    protected ?int $userId;
 
     public function __construct(array $recipient)
     {

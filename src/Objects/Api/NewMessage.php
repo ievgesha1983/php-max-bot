@@ -2,9 +2,10 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Api;
 
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
 use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage\Body;
 
-class NewMessage
+class NewMessage extends AbstractProcessor
 {
     private int|false $userId = false;
     private int|false $chatId = false;

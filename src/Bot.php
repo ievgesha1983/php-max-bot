@@ -11,14 +11,15 @@ class Bot extends AbstractProcessor
 {
     protected int $userId;
     protected string $firstName;
-    protected string $name;
-    protected string $username;
+    protected ?string $lastName;
+    protected ?string $username;
     protected bool $isBot = true;
     protected int $lastActivityTime;
-    protected string|false $description = false;
-    protected string|false $avatarUrl = false;
-    protected string|false $fullAvatarUrl = false;
-    protected Command|false $command = false;
+    protected ?string $name;
+    protected ?string $description;
+    protected string $avatarUrl;
+    protected string $fullAvatarUrl;
+    protected ?array $commands;
     private ApiGateway $api;
 
     public function __construct(string $token)

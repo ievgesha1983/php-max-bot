@@ -2,8 +2,10 @@
 
 namespace EvgeshaFactory\PhpMaxBot\Objects\Bot;
 
-class Command
+use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+
+class Command extends AbstractProcessor
 {
-    private string $name;
-    private string|false $description = false;
+    protected string $name;
+    protected ?string $description;
 }

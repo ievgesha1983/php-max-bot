@@ -11,17 +11,18 @@ class AbstractProcessor
 
     public function convertToMaxArray(): array
     {
-        $convertedArray = array_map(
-            fn ($child) => is_object($child) ? $this->$child->convertToMaxArray() : $child,
-            get_object_vars($this)
-        );
+        $children = get_object_vars($this);
+        $convertedChildren = [];
+        foreach ($children as $key => $value) {
+            $convertedChildren[$key] = is_object($value) ? $this->$key->convertToMaxArray() : $value;
+        };
 
         $switchedKeys = array_map(
             fn ($key) => $this->switchCamelCaseToSnakeCase($key),
-            array_keys($convertedArray)
+            array_keys($convertedChildren)
         );
 
-        return array_combine($switchedKeys, array_values($convertedArray));
+        return array_combine($switchedKeys, array_values($convertedChildren));
     }
 
     public function convertToArray(): array
