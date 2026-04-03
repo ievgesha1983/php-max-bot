@@ -13,22 +13,22 @@ class NewMessage extends AbstractProcessor
     protected Body $body;
 
     public function __construct(
-        int|false $userId = false,
-        int|false $chatId = false,
-        bool|null $disableLinkPreview = null,
-        array|false $body = false
+        int|false $userIdIntermediate = false,
+        int|false $chatIdIntermediate = false,
+        bool|null $disableLinkPreviewIntermediate = null,
+        array|false $bodyIntermediate = false
     ) {
-        if ($userId !== false) {
-            $this->userId = $userId;
+        if ($userIdIntermediate !== false) {
+            $this->userId = $userIdIntermediate;
         }
-        if ($chatId !== false) {
-            $this->chatId = $chatId;
+        if ($chatIdIntermediate !== false) {
+            $this->chatId = $chatIdIntermediate;
         }
-        if (!is_null($disableLinkPreview)) {
-            $this->disableLinkPreview = $disableLinkPreview;
+        if (!is_null($disableLinkPreviewIntermediate)) {
+            $this->disableLinkPreview = $disableLinkPreviewIntermediate;
         }
-        if ($body !== false) {
-            $this->body = new Body($body);
+        if ($bodyIntermediate !== false) {
+            $this->body = new Body($bodyIntermediate);
         }
     }
 
