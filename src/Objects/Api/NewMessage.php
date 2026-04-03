@@ -7,24 +7,32 @@ use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage\Body;
 
 class NewMessage extends AbstractProcessor
 {
-    private int|false $userId = false;
-    private int|false $chatId = false;
-    private bool|null $disableLinkPreview = null;
-    private Body|null $body = null;
+    protected int $userId;
+    protected int $chatId;
+    protected bool $disableLinkPreview;
+    protected Body $body;
 
     public function __construct(
         int|false $userId = false,
         int|false $chatId = false,
         bool|null $disableLinkPreview = null,
-        array|null $body = null
+        array|false $body = false
     ) {
-        $this->userId = $userId;
-        $this->chatId = $chatId;
-        $this->disableLinkPreview = $disableLinkPreview;
-        $this->body = new Body($body);
+        if ($userId !== false) {
+            $this->userId = $userId;
+        }
+        if ($chatId !== false) {
+            $this->chatId = $chatId;
+        }
+        if (!is_null($disableLinkPreview)) {
+            $this->disableLinkPreview = $disableLinkPreview;
+        }
+        if ($body !== false) {
+            $this->body = new Body($body);
+        }
     }
 
-    public function getBody(): Body|null
+    public function getBody(): Body
     {
         return $this->body;
     }

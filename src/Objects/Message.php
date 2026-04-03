@@ -33,13 +33,18 @@ class Message extends AbstractProcessor
         }
     }
 
-    public function getSenderId()
+    public function getSenderId(): ?int
     {
         return $this->sender->getUserId();
     }
 
-    public function getText()
+    public function getText(): ?string
     {
         return $this->body->getText();
+    }
+
+    public function getChatType(): string
+    {
+        return $this->recipient->getChatType();
     }
 }

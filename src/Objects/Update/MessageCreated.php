@@ -23,7 +23,7 @@ class MessageCreated extends Update
         }
     }
 
-    public function getMessageText(): string
+    public function getMessageText(): ?string
     {
         return $this->message->getText();
     }
@@ -31,5 +31,10 @@ class MessageCreated extends Update
     public function getMessageSenderId(): ?int
     {
         return $this->message->getSenderId();
+    }
+
+    public function getChatType(): string
+    {
+        return $this->message->getChatType();
     }
 }

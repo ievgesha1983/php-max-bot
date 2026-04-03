@@ -8,11 +8,11 @@ use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage\Body\Link;
 
 class Body extends AbstractProcessor
 {
-    protected string|null $text;
-    protected Attachment|null $attachment;
-    protected Link|null $link;
+    protected ?string $text;
+    protected ?Attachment $attachment;
+    protected ?Link $link;
     protected bool $notify = true;
-    protected string|null $format;
+    protected ?string $format;
 
     public function __construct(array $body)
     {

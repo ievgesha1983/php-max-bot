@@ -18,4 +18,9 @@ class Recipient extends AbstractProcessor
             }
         }
     }
+
+    public function getChatType(): string
+    {
+        return $this->chatType;
+    }
 }
