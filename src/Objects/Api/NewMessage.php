@@ -13,22 +13,22 @@ class NewMessage extends AbstractProcessor
     protected Body $body;
 
     public function __construct(
-        int|false $userIdIntermediate = false,
-        int|false $chatIdIntermediate = false,
-        bool|null $disableLinkPreviewIntermediate = null,
-        array|false $bodyIntermediate = false
+        int|false $userId = false,
+        int|false $chatId = false,
+        bool|null $disableLinkPreview = null,
+        array|false $body = false
     ) {
-        if ($userIdIntermediate !== false) {
-            $this->userId = $userIdIntermediate;
+        if ($userId !== false) {
+            $this->userId = $userId;
         }
-        if ($chatIdIntermediate !== false) {
-            $this->chatId = $chatIdIntermediate;
+        if ($chatId !== false) {
+            $this->chatId = $chatId;
         }
-        if (!is_null($disableLinkPreviewIntermediate)) {
-            $this->disableLinkPreview = $disableLinkPreviewIntermediate;
+        if (!is_null($disableLinkPreview)) {
+            $this->disableLinkPreview = $disableLinkPreview;
         }
-        if ($bodyIntermediate !== false) {
-            $this->body = new Body($bodyIntermediate);
+        if ($body !== false) {
+            $this->body = new Body($body);
         }
     }
 
@@ -40,15 +40,15 @@ class NewMessage extends AbstractProcessor
     public function createGetParameters(): string
     {
         $parameters = '';
-        if ($this->userId !== false) {
+        if (isset($this->userId)) {
             $parameters = "{$parameters}&user_id={$this->userId}";
         }
 
-        if ($this->chatId !== false) {
+        if (isset($this->chatId)) {
             $parameters = "{$parameters}&chat_id={$this->chatId}";
         }
 
-        if ($this->disableLinkPreview !== null) {
+        if (isset($this->disableLinkPreview)) {
             $parameters = "{$parameters}&disable_link_preview={$this->disableLinkPreview}";
         }
 
