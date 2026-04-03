@@ -3,6 +3,8 @@
 namespace EvgeshaFactory\PhpMaxBot;
 
 use EvgeshaFactory\PhpMaxBot\Objects\AbstractProcessor;
+use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage;
+use EvgeshaFactory\PhpMaxBot\Objects\Api\NewMessage\Body;
 use EvgeshaFactory\PhpMaxBot\Objects\Api\NewSubscription;
 use EvgeshaFactory\PhpMaxBot\Objects\Bot\Command;
 use EvgeshaFactory\PhpMaxBot\Objects\Update;
@@ -53,8 +55,13 @@ class Bot extends AbstractProcessor
         return $responseProcessor->decodeUpdates($updates);
     }
 
-    public function sendMessage($message): array
-    {
+    public function sendMessage(
+        int|false $userId = false,
+        int|false $chatId = false,
+        bool|null $disableLinkPreview = null,
+        array|false $body = false
+    ): array {
+        $message = new NewMessage($userId, $chatId, $disableLinkPreview, $body);
         $sendMessagesResponse = $this->api->sendMessage($message);
         $responseProcessor = new ResponseProcessor();
         return $responseProcessor->decodeSendMessage($sendMessagesResponse);
