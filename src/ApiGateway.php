@@ -8,7 +8,7 @@ use EvgeshaFactory\PhpMaxBot\Objects\Message;
 
 class ApiGateway
 {
-    private const string API_MAX = "https://platform-api.max.ru";
+    private const string API_MAX = "https://platform-api2.max.ru";
     private const string API_ME = "/me";
     private const string API_CHATS = "/chats";
     private const string API_UPDATES = "/updates";

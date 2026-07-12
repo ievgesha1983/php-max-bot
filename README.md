@@ -23,7 +23,7 @@ getUpdates
 
 sendMessage
 
-getSubscription
+getSubscriptions
 
 subscribeToUpdate
 
